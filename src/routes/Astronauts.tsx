@@ -20,14 +20,20 @@ export default function Astronauts() {
   return (
     <>
       <PageHeader
-        title="Who's up there?"
-        description="See all the people currently in space and what the corresponding space craft they are located on. "
+        title={
+          <>
+            <span className="text-primary">Who's up there?</span> Astronaut
+            Tracker
+          </>
+        }
+        description="Discover the latest information about astronauts currently orbiting our planet. Our table provides up-to-date details about the number of individuals in space, their names, and the spacecraft they're aboard. Stay connected with humanity's ventures beyond Earth and keep track of who is currently among the stars."
       />
       <div className="astronaut-table bg-neutral shadow-xl rounded-lg mt-4">
         <Table<IAstronauts>
           columnDefinitions={ASTRONAUT_COLUMN_DEFINITIONS}
           tableData={data?.people}
           isLoading={isLoading}
+          keyName="name"
         />
       </div>
     </>

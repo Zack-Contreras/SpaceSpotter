@@ -7,13 +7,21 @@ import NavbarPage from "./components/NavbarPage.tsx";
 import Astronauts from "./routes/Astronauts.tsx";
 import Profile from "./routes/Profile.tsx";
 import SpaceStation from "./routes/SpaceStation.tsx";
+import { QueryClient, QueryClientProvider } from "react-query";
 import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from "react-query";
+  ClerkProvider,
+  SignedIn,
+  SignedOut,
+  UserButton,
+  useUser,
+  RedirectToSignIn,
+} from "@clerk/clerk-react";
+
+if (!import.meta.env.VITE_CLERK_PUBLISHABLE_KEY) {
+  throw new Error("Missing Publishable Key");
+}
+const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+console.log(clerkPubKey);
 
 // Create react-query client
 const queryClient = new QueryClient();
@@ -63,8 +71,15 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-    </QueryClientProvider>
+    <ClerkProvider publishableKey={clerkPubKey}>
+      <SignedIn>
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+        </QueryClientProvider>
+      </SignedIn>
+      <SignedOut>
+        <RedirectToSignIn />
+      </SignedOut>
+    </ClerkProvider>
   </React.StrictMode>
 );

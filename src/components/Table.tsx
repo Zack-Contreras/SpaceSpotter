@@ -8,14 +8,12 @@ interface ITable<T> {
   columnDefinitions: ColumnDefinition[];
   tableData: object[] | undefined;
   isLoading?: boolean;
+  keyName: string;
 }
 
 const TableLoadingState = () => (
-  <div className="overflow-x-auto">
-    <table className="table">
-      <p>fetching data</p>
-      <span className="loading loading-ring loading-lg"></span>
-    </table>
+  <div className="overflow-x-auto text-center p-2">
+    <span className="loading loading-ring loading-lg"></span>
   </div>
 );
 
@@ -23,10 +21,8 @@ export default function Table<T>({
   columnDefinitions,
   tableData,
   isLoading,
+  keyName,
 }: ITable<T>) {
-  if (isLoading) {
-    return <TableLoadingState />;
-  }
   return (
     <div className="overflow-x-auto">
       <table className="table">
@@ -34,19 +30,29 @@ export default function Table<T>({
         <thead>
           <tr>
             {columnDefinitions.map((column) => (
-              <th>{column.columnName}</th>
+              <th key={column.columnName}>{column.columnName}</th>
             ))}
           </tr>
         </thead>
-        <tbody>
-          {tableData?.map((row) => (
-            <tr className="hover:bg-neutral-focus">
-              {Object.values(row).map((value) => (
-                <td>{value}</td>
-              ))}
+        {isLoading ? (
+          <tbody>
+            <tr>
+              <td colSpan={2}>
+                <TableLoadingState />
+              </td>
             </tr>
-          ))}
-        </tbody>
+          </tbody>
+        ) : (
+          <tbody>
+            {tableData?.map((row: Record<string, any>) => (
+              <tr key={row?.[keyName]} className="hover:bg-neutral-focus">
+                {Object.values(row).map((value) => (
+                  <td key={value}>{value}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        )}
       </table>
     </div>
   );
