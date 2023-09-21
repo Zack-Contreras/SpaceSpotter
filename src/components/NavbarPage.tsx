@@ -57,7 +57,7 @@ export default function NavbarPage({ children }: INavbarPage) {
             className="white-filter"
             height={100}
             width={50}
-            src="./International_Space_Station.svg"
+            src="./spacestation.svg"
             alt="International Space Station"
           />
           <p>Copyright © 2023 - All right reserved</p>

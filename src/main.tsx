@@ -31,7 +31,7 @@ const router = createBrowserRouter([
     path: "/",
     element: (
       <NavbarPage>
-        <App />
+        <Profile />
       </NavbarPage>
     ),
   },
@@ -40,22 +40,6 @@ const router = createBrowserRouter([
     element: (
       <NavbarPage>
         <SpaceStation />
-      </NavbarPage>
-    ),
-  },
-  {
-    path: "/astronauts",
-    element: (
-      <NavbarPage>
-        <Astronauts />
-      </NavbarPage>
-    ),
-  },
-  {
-    path: "/profile",
-    element: (
-      <NavbarPage>
-        <Profile />
       </NavbarPage>
     ),
   },

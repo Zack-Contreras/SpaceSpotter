@@ -7,6 +7,7 @@ import {
   Marker,
   Graticule,
 } from "react-simple-maps";
+import CustomMarker from "./CustomMarker";
 
 const geoUrl =
   "https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.json";
@@ -40,12 +41,7 @@ function InteractableMap({ marker }: IInteractableMap) {
         </Geographies>
         {marker && (
           <Marker coordinates={[marker.longitude, marker.latitude]}>
-            <svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="50" cy="50" r="30" fill="#F53" opacity="0.5" />
-              <text x="50" y="55" textAnchor="middle" fill="white">
-                🛰️
-              </text>
-            </svg>
+            <CustomMarker />
           </Marker>
         )}
       </ZoomableGroup>
