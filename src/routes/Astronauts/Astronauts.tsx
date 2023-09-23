@@ -1,9 +1,9 @@
-import React from "react";
 import { useQuery } from "react-query";
-import { IAstronauts, getAstronauts } from "../../queries/astronauts";
+import { getAstronauts } from "../../queries/astronauts";
 import Table, { ColumnDefinition } from "../../components/Table/Table";
 import PageHeader from "../../components/PageHeader";
 import ErrorAlert from "../../components/ErrorAlert";
+import AnimatedContainer from "../../components/AnimatedContainer";
 
 const ASTRONAUT_COLUMN_DEFINITIONS: ColumnDefinition[] = [
   { columnName: "Name" },
@@ -19,7 +19,7 @@ export default function Astronauts() {
   console.log(data, isError, error);
 
   return (
-    <>
+    <AnimatedContainer>
       <PageHeader
         title={
           <>
@@ -33,7 +33,7 @@ export default function Astronauts() {
         {isError ? (
           <ErrorAlert message="Unable to fetch list of astronauts" />
         ) : (
-          <Table<IAstronauts>
+          <Table
             columnDefinitions={ASTRONAUT_COLUMN_DEFINITIONS}
             tableData={data?.people}
             isLoading={isLoading}
@@ -42,6 +42,6 @@ export default function Astronauts() {
           />
         )}
       </div>
-    </>
+    </AnimatedContainer>
   );
 }

@@ -1,13 +1,4 @@
-import React from "react";
-
 function CustomMarker() {
-  const colorMatrix = {
-    red: 0.7,
-    green: 0,
-    blue: 0,
-    alpha: 1,
-  };
-
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
       <circle cx="50" cy="50" r="30" fill="#FFF" opacity="0.5" />

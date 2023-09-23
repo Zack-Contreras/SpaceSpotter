@@ -1,5 +1,3 @@
-import React from "react";
-
 function LoadingState() {
   return (
     <div className="overflow-x-auto text-center p-2">

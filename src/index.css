@@ -21,10 +21,6 @@
   justify-content: space-between;
 }
 
-main {
-  padding: 0.5rem;
-}
-
 .white-filter {
   filter: invert(80%) sepia(71%) saturate(13%) hue-rotate(182deg)
     brightness(99%) contrast(78%);

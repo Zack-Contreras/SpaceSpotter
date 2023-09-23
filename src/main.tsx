@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import App from "./App.tsx";
 import "./index.css";
 import NavbarPage from "./components/NavbarPage.tsx";
 import Astronauts from "./routes/Astronauts/Astronauts.tsx";
@@ -14,6 +13,7 @@ import {
   SignedOut,
   RedirectToSignIn,
 } from "@clerk/clerk-react";
+import { AnimatePresence } from "framer-motion";
 
 if (!import.meta.env.VITE_CLERK_PUBLISHABLE_KEY) {
   throw new Error("Missing Publishable Key");
@@ -55,7 +55,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <ClerkProvider publishableKey={clerkPubKey}>
       <SignedIn>
         <QueryClientProvider client={queryClient}>
-          <RouterProvider router={router} />
+          <AnimatePresence mode="wait">
+            <RouterProvider router={router} />
+          </AnimatePresence>
         </QueryClientProvider>
       </SignedIn>
       <SignedOut>

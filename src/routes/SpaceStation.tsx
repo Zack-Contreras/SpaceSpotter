@@ -1,16 +1,16 @@
-import React from "react";
 import PageHeader from "../components/PageHeader";
 import { getSpaceStationLocation } from "../queries/spacestation";
 import { useQuery } from "react-query";
 import InteractableMap from "../components/InteractableMap";
 import ErrorAlert from "../components/ErrorAlert";
+import AnimatedContainer from "../components/AnimatedContainer";
 
 export default function SpaceStation() {
   const { isLoading, isError, data, error } = useQuery(
     "spacestation",
     getSpaceStationLocation,
     {
-      refetchInterval: 1000,
+      refetchInterval: 5000,
     }
   );
 
@@ -24,7 +24,7 @@ export default function SpaceStation() {
     : "Unable to retrieve timestamp";
 
   return (
-    <>
+    <AnimatedContainer>
       <PageHeader
         title={
           <>
@@ -38,7 +38,7 @@ export default function SpaceStation() {
           <ErrorAlert message="Unable to fetch ISS location" />
         ) : (
           <>
-            <h2 className="text-xl m-auto py-4">
+            <h2 className="text-l md:text-xl m-auto py-4 px-4">
               {updatedTime.toLocaleString()}
             </h2>
             <InteractableMap
@@ -48,6 +48,6 @@ export default function SpaceStation() {
           </>
         )}
       </div>
-    </>
+    </AnimatedContainer>
   );
 }

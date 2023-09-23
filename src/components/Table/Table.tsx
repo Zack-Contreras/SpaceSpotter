@@ -1,4 +1,3 @@
-import React from "react";
 import LoadingState from "../LoadingState";
 
 /**
@@ -12,7 +11,7 @@ export interface ColumnDefinition {
   columnName: string;
 }
 
-interface ITable<T> {
+interface ITable {
   columnDefinitions: ColumnDefinition[];
   tableData: object[] | undefined;
   isLoading?: boolean;
@@ -20,13 +19,13 @@ interface ITable<T> {
   testId?: string;
 }
 
-export default function Table<T>({
+export default function Table({
   columnDefinitions,
   tableData,
   isLoading,
   keyName,
   testId,
-}: ITable<T>) {
+}: ITable) {
   return (
     <div className="overflow-x-auto">
       <table data-testid={testId ?? "table-component"} className="table">
