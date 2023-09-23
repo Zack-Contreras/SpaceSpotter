@@ -28,7 +28,7 @@ export default function Profile() {
             <Link to={"/astronauts"} className="btn btn-primary">
               Astronauts
             </Link>
-            <Link to={"/spacestation"} className="btn btn-secondary ml-2">
+            <Link to={"/spacestation"} className="btn ml-2">
               ISS Location
             </Link>
           </div>

@@ -9,9 +9,10 @@ export interface AstronautsResponse {
   people: IAstronauts[];
 }
 
+/**
+ * Return list of current astronauts in space
+ */
 export const getAstronauts = async (): Promise<AstronautsResponse> => {
   const response = await fetch("http://api.open-notify.org/astros.json");
-  // const json = await response.json();
-
   return response.json();
 };

@@ -8,18 +8,20 @@ import {
   Graticule,
 } from "react-simple-maps";
 import CustomMarker from "./CustomMarker";
-
-const geoUrl =
-  "https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.json";
+import LoadingState from "./LoadingState";
 
 interface IInteractableMap {
   marker?: {
     latitude: number;
     longitude: number;
   };
+  loading?: boolean;
 }
 
-function InteractableMap({ marker }: IInteractableMap) {
+function InteractableMap({ marker, loading }: IInteractableMap) {
+  if (loading) {
+    return <LoadingState />;
+  }
   return (
     <ComposableMap>
       <ZoomableGroup center={[marker?.longitude ?? 0, marker?.latitude ?? 0]}>

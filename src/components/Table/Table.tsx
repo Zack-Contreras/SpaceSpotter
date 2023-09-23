@@ -1,4 +1,12 @@
 import React from "react";
+import LoadingState from "../LoadingState";
+
+/**
+ * TODO
+ * - empty state
+ * - column sorting
+ * - error state
+ */
 
 export interface ColumnDefinition {
   columnName: string;
@@ -9,28 +17,29 @@ interface ITable<T> {
   tableData: object[] | undefined;
   isLoading?: boolean;
   keyName: string;
+  testId?: string;
 }
-
-const TableLoadingState = () => (
-  <div className="overflow-x-auto text-center p-2">
-    <span className="loading loading-ring loading-lg"></span>
-  </div>
-);
 
 export default function Table<T>({
   columnDefinitions,
   tableData,
   isLoading,
   keyName,
+  testId,
 }: ITable<T>) {
   return (
     <div className="overflow-x-auto">
-      <table className="table">
+      <table data-testid={testId ?? "table-component"} className="table">
         {/* head */}
         <thead>
           <tr>
             {columnDefinitions.map((column) => (
-              <th key={column.columnName}>{column.columnName}</th>
+              <th
+                data-testid={`column-${column.columnName}`}
+                key={column.columnName}
+              >
+                {column.columnName}
+              </th>
             ))}
           </tr>
         </thead>
@@ -38,14 +47,18 @@ export default function Table<T>({
           <tbody>
             <tr>
               <td colSpan={2}>
-                <TableLoadingState />
+                <LoadingState />
               </td>
             </tr>
           </tbody>
         ) : (
           <tbody>
             {tableData?.map((row: Record<string, any>) => (
-              <tr key={row?.[keyName]} className="hover:bg-neutral-focus">
+              <tr
+                data-testid="table-row"
+                key={row?.[keyName]}
+                className="hover:bg-neutral-focus"
+              >
                 {Object.values(row).map((value) => (
                   <td key={value}>{value}</td>
                 ))}

@@ -7,8 +7,10 @@ interface IPageHeader {
 function PageHeader({ title, description }: IPageHeader) {
   return (
     <div className="page-title">
-      <h1 className="text-2xl font-bold">{title}</h1>
-      <p>{description}</p>
+      <h1 data-testid="page-header" className="text-2xl font-bold">
+        {title}
+      </h1>
+      {description && <p data-testid="page-description">{description}</p>}
     </div>
   );
 }
